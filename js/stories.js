@@ -53,6 +53,26 @@ function putStoriesOnPage() {
 
 /** */
 
-function createStoryFormAndAddNewStory() {
+async function addNewStory(evt) {
+  console.debug("addNewStory");
+  evt.preventDefault();
+  
+  const storyAuthorVal = $("#story-author").val()
+  const storyTitleVal = $("#story-title").val()
+  const storyUrlVal = $("#story-url").val()
 
+  const newFormVals = {
+    author: storyAuthorVal,
+    title: storyTitleVal, url: storyUrlVal
+  }
+  
+  const newStory =  await storyList.addStory(currentUser, newFormVals)
+  $storySubmit.trigger("reset");
+
+  console.log(newStory);
 }
+
+$storyForm.on("submit", addNewStory)
+
+
+
