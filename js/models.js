@@ -25,7 +25,8 @@ class Story {
 
   getHostName() {
     // UNIMPLEMENTED: complete this function!
-    return "hostname.com";
+    const domain = new URL(this.url);
+    return domain.hostname; // returns hostname of input url
   }
 }
 
@@ -73,15 +74,13 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  async addStory(currentUser,newStory) {
-
-    const storyToPost = axios.post("https://hack-or-snooze-v3.herokuapp.com/stories",
-       {token: currentUser.token, story: {newStory}});
-
-    return storyToPost;
+  async addStory(currentUser, newStory) {
+    const storyData = await axios.post(`${BASE_URL}/stories`,
+       {token: currentUser.loginToken, story: newStory});
+    console.log(storyData.data.story);
+    return new Story(storyData.data.story);
   }
 }
-
 
 /******************************************************************************
  * User: a user in the system (only used to represent the current user)
