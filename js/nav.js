@@ -35,6 +35,7 @@ function updateNavOnLogin() {
   $navLogin.hide();
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
+  $navLinks.show();
 }
 
 /** */
@@ -44,3 +45,20 @@ function showStoryForm() {
 };
 
 $navLinks.on("click","#nav-submit", showStoryForm);
+
+
+/** */
+function showFavorites() {
+  hidePageComponents();
+
+}
+
+$navFavorites.on("click","#nav-favorites", showFavorites);
+
+/** */
+function showMyStories(){
+  hidePageComponents();
+
+}
+
+$navMyStories.on("click","#nav-submit", showMyStories);

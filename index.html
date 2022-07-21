@@ -33,7 +33,7 @@
     <div class="navbar-brand">
       <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
     </div>
-    <div class="nav-bar-link">
+    <div class="nav-bar-link hidden">
       <a class="nav-link" id="nav-submit">submit</a>
       <a class="nav-link" id="nav-favorites">favorites</a>
       <a class="nav-link" id="nav-stories">my stories</a>
@@ -45,24 +45,38 @@
     </div>
   </nav>
 
-<!-- Story Form -->
-  <section class=" container" >
+  <!-- Story Form -->
+  <section class="container">
     <form id="story-form" class="hidden">
-      <div class="">
+      <div>
         <label for="">Author</label>
-        <input id="story-author" type="text" > 
+        <input id="story-author" type="text">
       </div>
-      <div class="">
+      <div>
         <label for="">Title</label>
-        <input id="story-title" type="text" >
+        <input id="story-title" type="text">
       </div>
-      <div class="">
+      <div>
         <label for="">URL</label>
-        <input id="story-url" type="text" >
+        <input id="story-url" type="text">
       </div>
       <button type="submit" id="story-submit-btn">Submit</button>
       <hr>
     </form>
+  </section>
+
+  <!-- Favorites -->
+  <section class="favorites-container container">
+    <!-- List of all favorite stories -->
+    <ul id="favorites-list" class="hidden"> My Favorites List</ul>
+
+  </section>
+
+  <!-- My Stories -->
+  <section class="my-stories-container container">
+    <!-- List of my stories -->
+    <ul id="my-stories-list" class="hidden"> My Stories List</ul>
+
   </section>
 
   <!-- area for stories (all stories, user stories, favorites) -->
