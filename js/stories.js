@@ -131,16 +131,17 @@ function checkIfFavorited(storyId) {
 
 /** Add or remove story on favorites */
 async function addOrRemoveFavorite(evt) {
-  const storyId = evt.target.parentElement.id;
+  const $storyId = $(evt.target).parent().attr("id");
+  console.log('jquery',$(evt.target).parent().attr("id"))//use jquery throughout
   let userFavoritesList;
 
-  console.log(storyId);
+  console.log($storyId);
   console.log(evt.target.className);
 
-  if(checkIfFavorited(storyId)) {
-    userFavoritesList = await currentUser.removeFavoriteStory(storyId);
+  if(checkIfFavorited($storyId)) {
+    userFavoritesList = await currentUser.removeFavoriteStory($storyId);
   } else {
-    userFavoritesList = await currentUser.addFavoriteStory(storyId);
+    userFavoritesList = await currentUser.addFavoriteStory($storyId);
   }
 
   currentUser.favorites = userFavoritesList;
@@ -152,9 +153,13 @@ $favoritesList.on("click", $stars, addOrRemoveFavorite);
 
 /** toggles star icon depending on favorites list */
 function toggleStar(evt) {
-  if(evt.target.className.includes('bi-star-fill')){
-    evt.target.classList.replace('bi-star-fill', 'bi-star');
-  } else {
-    evt.target.classList.replace('bi-star', 'bi-star-fill');
-  }
+  const $target = $(evt.target)
+  $target.toggleClass("bi-star bi-star-fill");
+
+  //Learning from our mistakes using vanilla DOM manipulation 
+  // if($target.className.includes('bi-star-fill')){
+  //   $target.classList.replace('bi-star-fill', 'bi-star'); // Jquery has toggleClass
+  // } else {
+  //   $target.classList.replace('bi-star', 'bi-star-fill');
+  // }
 }
