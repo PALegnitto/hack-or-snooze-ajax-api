@@ -25,6 +25,7 @@ function generateStoryMarkup(story) {
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
+      <i class="bi bi-star"></i>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -97,3 +98,16 @@ function putMyStoriesOnPage(myStoryList){
   }
   $myStoriesList.show();
 }
+
+
+/** Detect click for favoriting*/
+
+$allStoriesList.on("click", $stars, checkIfFavorited)
+
+function checkIfFavorited(evt) {
+  console.log(evt.target.parentElement.id);
+}
+
+
+/** Add or remove story on favorites */
+

@@ -165,6 +165,8 @@ class User {
       },
       response.data.token
     );
+
+
   }
 
   /** When we already have credentials (token & username) for a user,
@@ -196,4 +198,16 @@ class User {
       return null;
     }
   }
+
+  /**Adds story to the user's favorite list */
+
+  //  addFavoriteStory(currentUser, favoriteStoryId) {
+  //   const userName = currentUser.username;
+  //   const favoriteStory = await axios.post(`${BASE_URL}/stories/users/${userName}/favorites/${favorStoryId}`,
+  //     );
+  
+
+  // }
+
+
 }
