@@ -22,8 +22,12 @@ async function getAndShowStoriesOnStart() {
 function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
   const storyId = story.storyId;
-  const starFill = checkIfFavorited(storyId) ? 'bi-star-fill' : 'bi-star';
   const hostName = story.getHostName();
+  let starFill = "hidden";
+
+  if (currentUser) {
+    starFill = checkIfFavorited(storyId) ? 'bi-star-fill' : 'bi-star';
+  };
 
   return $(`
       <li id="${story.storyId}">
