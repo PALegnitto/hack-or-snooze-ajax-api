@@ -50,9 +50,11 @@ $navLinks.on("click", "#nav-submit", showStoryForm);
 /** */
 function showFavorites() {
   hidePageComponents();
+  putMyFavoritesOnPage(currentUser.favorites);
 }
 
 $navFavorites.on("click", showFavorites);
+
 
 /** */
 function showMyStories(){

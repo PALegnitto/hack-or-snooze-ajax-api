@@ -80,6 +80,14 @@ class StoryList {
     console.log(storyData.data.story);
     return new Story(storyData.data.story);
   }
+
+  async removeStory(currentUser, storyID) {
+    const storyData = await axios.delete(`${BASE_URL}/stories/${storyID}`,
+       {data: {token: currentUser.loginToken}});
+    console.log(storyData.data.story);
+    return new Story(storyData.data.story);
+  }
+
 }
 
 /******************************************************************************
@@ -201,13 +209,18 @@ class User {
 
   /**Adds story to the user's favorite list */
 
-  //  addFavoriteStory(currentUser, favoriteStoryId) {
-  //   const userName = currentUser.username;
-  //   const favoriteStory = await axios.post(`${BASE_URL}/stories/users/${userName}/favorites/${favorStoryId}`,
-  //     );
-  
+  async addFavoriteStory(storyId) {
+    const userName = currentUser.username;
+    const favoriteStory = await axios.post(`${BASE_URL}/users/${userName}/favorites/${storyId}`,
+    { token: currentUser.loginToken });
+    console.log(favoriteStory);
+  }
 
-  // }
-
+  async removeFavoriteStory(storyId) {
+    const userName = currentUser.username;
+    const unFavoriteStory = await axios.delete(`${BASE_URL}/users/${userName}/favorites/${storyId}`,
+    { data: {token: currentUser.loginToken}});
+    console.log(unFavoriteStory);
+  }
 
 }

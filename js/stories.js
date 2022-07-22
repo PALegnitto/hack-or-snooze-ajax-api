@@ -89,6 +89,17 @@ function putNewStoryOnPage(newStoryMarkup){
 }
 
 /** */
+function putMyFavoritesOnPage(myFavoritesList){
+  $favoritesList.empty();
+
+  for (let story of myFavoritesList) {
+    const $story = generateStoryMarkup(story);
+    $favoritesList.append($story);
+  }
+  $favoritesList.show();
+}
+
+/** */
 function putMyStoriesOnPage(myStoryList){
   $myStoriesList.empty();
 
@@ -102,12 +113,31 @@ function putMyStoriesOnPage(myStoryList){
 
 /** Detect click for favoriting*/
 
-$allStoriesList.on("click", $stars, checkIfFavorited)
+function checkIfFavorited(storyId) {
 
-function checkIfFavorited(evt) {
-  console.log(evt.target.parentElement.id);
+  for(let story of currentUser.favorites) {
+    console.log(story.storyId);
+    if(storyId === story.storyId) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
-
 /** Add or remove story on favorites */
+function addOrRemoveFavorite(evt) {
+  const storyId = evt.target.parentElement.id;
+  console.log(storyId);
+
+  if(checkIfFavorited(storyId)) {
+    currentUser.removeFavoriteStory(storyId);
+  } else {
+    currentUser.addFavoriteStory(storyId);
+  }
+
+}
+
+$allStoriesList.on("click", $stars, addOrRemoveFavorite);
+$favoritesList.on("click", $stars, addOrRemoveFavorite);
 
