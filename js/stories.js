@@ -21,11 +21,13 @@ async function getAndShowStoriesOnStart() {
 
 function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
-
+  const storyId = story.storyId;
+  const starFill = checkIfFavorited(storyId) ? 'bi-star-fill' : 'bi-star';
   const hostName = story.getHostName();
+
   return $(`
       <li id="${story.storyId}">
-      <i class="bi bi-star"></i>
+      <i class="bi ${starFill}"></i>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -111,34 +113,44 @@ function putMyStoriesOnPage(myStoryList){
 }
 
 
-/** Detect click for favoriting*/
+/** Detect click for favoriting */
 
 function checkIfFavorited(storyId) {
-
   for(let story of currentUser.favorites) {
-    console.log(story.storyId);
+    //console.log(story.storyId);
     if(storyId === story.storyId) {
       return true;
-    } else {
-      return false;
     }
   }
+  return false;
 }
 
 /** Add or remove story on favorites */
-function addOrRemoveFavorite(evt) {
+async function addOrRemoveFavorite(evt) {
   const storyId = evt.target.parentElement.id;
+  let userFavoritesList;
 
   console.log(storyId);
+  console.log(evt.target.className);
 
   if(checkIfFavorited(storyId)) {
-    currentUser.removeFavoriteStory(storyId);
+    userFavoritesList = await currentUser.removeFavoriteStory(storyId);
   } else {
-    currentUser.addFavoriteStory(storyId);
+    userFavoritesList = await currentUser.addFavoriteStory(storyId);
   }
 
+  currentUser.favorites = userFavoritesList;
+  toggleStar(evt);
 }
 
 $allStoriesList.on("click", $stars, addOrRemoveFavorite);
 $favoritesList.on("click", $stars, addOrRemoveFavorite);
 
+/** toggles star icon depending on favorites list */
+function toggleStar(evt) {
+  if(evt.target.className.includes('bi-star-fill')){
+    evt.target.classList.replace('bi-star-fill', 'bi-star');
+  } else {
+    evt.target.classList.replace('bi-star', 'bi-star-fill');
+  }
+}

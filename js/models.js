@@ -213,24 +213,25 @@ class User {
     const userName = currentUser.username;
     const favoriteStory = await axios.post(`${BASE_URL}/users/${userName}/favorites/${storyId}`,
     { token: currentUser.loginToken });
-    console.log(favoriteStory.data.user.favorites);
 
     const favoriteStories = favoriteStory.data.user.favorites.map(story => new Story(story));
-    
+
     const userFavoritesList = new StoryList(favoriteStories);
     console.log(userFavoritesList.stories);
-    currentUser.favorites = userFavoritesList.stories;
 
+    return userFavoritesList.stories
   }
 
   async removeFavoriteStory(storyId) {
     const userName = currentUser.username;
-    const unFavoriteStory = await axios.delete(`${BASE_URL}/users/${userName}/favorites/${storyId}`,
+    const favoriteStory = await axios.delete(`${BASE_URL}/users/${userName}/favorites/${storyId}`,
     { data: {token: currentUser.loginToken}});
-    console.log(unFavoriteStory.data.user.favorites);
-    console.log(unFavoriteStory)
 
-    currentUser.favorites = unFavoriteStory.data.user.favorites;
+    const favoriteStories = favoriteStory.data.user.favorites.map(story => new Story(story));
+
+    const userFavoritesList = new StoryList(favoriteStories);
+    console.log(userFavoritesList.stories);
+
+    return userFavoritesList.stories;
   }
-
 }
