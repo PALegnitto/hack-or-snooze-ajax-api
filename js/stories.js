@@ -128,6 +128,7 @@ function checkIfFavorited(storyId) {
 /** Add or remove story on favorites */
 function addOrRemoveFavorite(evt) {
   const storyId = evt.target.parentElement.id;
+
   console.log(storyId);
 
   if(checkIfFavorited(storyId)) {
