@@ -44,21 +44,20 @@ function showStoryForm() {
   $storyForm.show();
 };
 
-$navLinks.on("click","#nav-submit", showStoryForm);
+$navLinks.on("click", "#nav-submit", showStoryForm);
 
 
 /** */
 function showFavorites() {
   hidePageComponents();
-
 }
 
-$navFavorites.on("click","#nav-favorites", showFavorites);
+$navFavorites.on("click", showFavorites);
 
 /** */
 function showMyStories(){
   hidePageComponents();
-
+  putMyStoriesOnPage(currentUser.ownStories);
 }
 
-$navMyStories.on("click","#nav-submit", showMyStories);
+$navMyStories.on("click", showMyStories);

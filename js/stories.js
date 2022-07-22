@@ -68,6 +68,7 @@ async function addNewStory(evt) {
   }
 
   const newStory =  await storyList.addStory(currentUser, newFormVals);
+  currentUser.ownStories.unshift(newStory);
 
   $storyForm.trigger("reset");
   $storyForm.hide();
@@ -84,4 +85,15 @@ function putNewStoryOnPage(newStoryMarkup){
   $allStoriesList.prepend(newStoryMarkup);
 
   $allStoriesList.show();
+}
+
+/** */
+function putMyStoriesOnPage(myStoryList){
+  $myStoriesList.empty();
+
+  for (let story of myStoryList) {
+    const $story = generateStoryMarkup(story);
+    $myStoriesList.append($story);
+  }
+  $myStoriesList.show();
 }
