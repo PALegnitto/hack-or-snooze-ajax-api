@@ -52,7 +52,7 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
 
-/** */
+/** Adds a submitted story to currentUser, as well as server and calls to update page*/
 
 async function addNewStory(evt) {
   console.debug("addNewStory");
@@ -68,7 +68,7 @@ async function addNewStory(evt) {
     url: storyUrlVal,
   }
 
-  const newStory =  await storyList.addStory(currentUser, newFormVals);
+  const newStory =  await storyList.addStory(newFormVals);
   currentUser.ownStories.unshift(newStory);
 
   $storyForm.trigger("reset");
@@ -80,7 +80,7 @@ async function addNewStory(evt) {
 
 $storyForm.on("submit", addNewStory);
 
-/** */
+/** Adds new story to list of stories*/
 
 function putNewStoryOnPage(newStoryMarkup){
   $allStoriesList.prepend(newStoryMarkup);
@@ -88,7 +88,7 @@ function putNewStoryOnPage(newStoryMarkup){
   $allStoriesList.show();
 }
 
-/** */
+/** posts list of favorites on the favorites page */
 function putMyFavoritesOnPage(myFavoritesList){
   $favoritesList.empty();
 
@@ -99,7 +99,7 @@ function putMyFavoritesOnPage(myFavoritesList){
   $favoritesList.show();
 }
 
-/** */
+/** posts list of user created stories on my story page */
 function putMyStoriesOnPage(myStoryList){
   $myStoriesList.empty();
 

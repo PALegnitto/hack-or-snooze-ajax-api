@@ -38,7 +38,7 @@ function updateNavOnLogin() {
   $navLinks.show();
 }
 
-/** */
+/**Hides all form and lists except the story form*/
 function showStoryForm() {
   hidePageComponents();
   $storyForm.show();
@@ -47,7 +47,7 @@ function showStoryForm() {
 $navLinks.on("click", "#nav-submit", showStoryForm);
 
 
-/** */
+/**Hides all forms/lists and unhides the favorites lists */
 function showFavorites() {
   hidePageComponents();
   putMyFavoritesOnPage(currentUser.favorites);
@@ -56,7 +56,7 @@ function showFavorites() {
 $navFavorites.on("click", showFavorites);
 
 
-/** */
+/** Hides all forms/lists and unhides the "My Story" list */
 function showMyStories(){
   hidePageComponents();
   putMyStoriesOnPage(currentUser.ownStories);
